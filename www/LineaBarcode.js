@@ -23,77 +23,77 @@ LineaBarcode.prototype.initLinea = function(connectionCallback, cardCallback, ba
     }
 };
            
-BarcodeScanner.prototype.barcodeSetChargeDeviceOn = function () {
+LineaBarcode.prototype.barcodeSetChargeDeviceOn = function () {
     if (cordova.platformId.toUpperCase() === 'IOS') {
         exec(null, null, "LineaBarcode", "barcodeSetChargeDeviceOn", []);
     }
 };
 
-BarcodeScanner.prototype.barcodeSetChargeDeviceOff = function () {
+LineaBarcode.prototype.barcodeSetChargeDeviceOff = function () {
     if (cordova.platformId.toUpperCase() === 'IOS') {
         exec(null, null, "LineaBarcode", "barcodeSetChargeDeviceOff", []);
     }
 };
 
-BarcodeScanner.prototype.barcodeSetPassThroughSyncOn = function () { //Used for syncing, barcode scanner wont work
+LineaBarcode.prototype.barcodeSetPassThroughSyncOn = function () { //Used for syncing, barcode scanner wont work
     if (cordova.platformId.toUpperCase() === 'IOS') {
         exec(null, null, "LineaBarcode", "barcodeSetPassThroughSyncOn", []);
     }
 };
 
-BarcodeScanner.prototype.barcodeSetPassThroughSyncOff = function () { //Used for scanning, Lightning sync wont work
+LineaBarcode.prototype.barcodeSetPassThroughSyncOff = function () { //Used for scanning, Lightning sync wont work
     if (cordova.platformId.toUpperCase() === 'IOS') {
         exec(null, null, "LineaBarcode", "barcodeSetPassThroughSyncOff", []);
     }
 };
 
-BarcodeScanner.prototype.barcodeSetScanBeepOff = function () {
+LineaBarcode.prototype.barcodeSetScanBeepOff = function () {
     if (cordova.platformId.toUpperCase() === 'IOS') {
         this.hasScanBeepOn = false;
         exec(function(success) { console.log(success);  }, function(error) { console.error(error);  }, "LineaBarcode", "barcodeSetScanBeepOff", []);
     }
 };
 
-BarcodeScanner.prototype.barcodeSetScanBeepOn = function () {
+LineaBarcode.prototype.barcodeSetScanBeepOn = function () {
     if (cordova.platformId.toUpperCase() === 'IOS') {
         this.hasScanBeepOn = true;
         exec(function(success) { console.log(success);  }, function(error) { console.error(error);  }, "LineaBarcode", "barcodeSetScanBeepOn", []);
     }
 };
 
-BarcodeScanner.prototype.barcodeButtonEnable = function () {
+LineaBarcode.prototype.barcodeButtonEnable = function () {
     if (cordova.platformId.toUpperCase() === 'IOS') {
         exec(null, null, "LineaBarcode", "enableBarcodeButton", []);
     }
 };
 
-BarcodeScanner.prototype.barcodeButtonDisable = function () {
+LineaBarcode.prototype.barcodeButtonDisable = function () {
     if (cordova.platformId.toUpperCase() === 'IOS') {
         exec(null, null, "LineaBarcode", "disableBarcodeButton", []);
     }
 };
 
-BarcodeScanner.prototype.barcodeStart = function () {
+LineaBarcode.prototype.barcodeStart = function () {
     if (cordova.platformId.toUpperCase() === 'IOS') {
         exec(null, null, "LineaBarcode", "startBarcode", []);
     }
 };
 
-BarcodeScanner.prototype.barcodeStop = function () {
+LineaBarcode.prototype.barcodeStop = function () {
     if (cordova.platformId.toUpperCase() === 'IOS') {        
         exec(null, null, "LineaBarcode", "stopBarcode", []);
     }
 };
 
-BarcodeScanner.prototype.connectionChanged = function (state) {    
+LineaBarcode.prototype.connectionChanged = function (state) {    
     this.connCallback(state);
 };
 
-BarcodeScanner.prototype.onMagneticCardData = function (track1, track2, track3) {
+LineaBarcode.prototype.onMagneticCardData = function (track1, track2, track3) {
     this.cardDataCallback(track1 + track2 + track3);
 };
 
-BarcodeScanner.prototype.onBarcodeData = function (rawCodesArr, type) {
+LineaBarcode.prototype.onBarcodeData = function (rawCodesArr, type) {
     var data = processLinea(rawCodesArr, type);
     
     var result = {
