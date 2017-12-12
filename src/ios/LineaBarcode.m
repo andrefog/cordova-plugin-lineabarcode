@@ -307,7 +307,7 @@
 
 - (void) barcodeNSData: (NSData *) barcode type:(int) type {    
     NSArray *codesArr = [[[NSString alloc] initWithData:barcode encoding:NSUTF8StringEncoding] componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"\n\r"]];
-	NSString* rawCodesArrJSString = [LineaProCDV generateStringForArrayEvaluationInJS:codesArr];
+	NSString* rawCodesArrJSString = [LineaBarcode generateStringForArrayEvaluationInJS:codesArr];
 	//BarcodeScanner.onBarcodeData(rawCode, type)
     NSString* retStr = [ NSString stringWithFormat:@"var rawCodesArr = %@; BarcodeScanner.onBarcodeData(rawCodesArr, '%@');", rawCodesArrJSString, [dtdev barcodeType2Text:type]];
     if ([self.webView respondsToSelector:@selector(stringByEvaluatingJavaScriptFromString:)]) {
