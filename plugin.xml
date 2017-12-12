@@ -28,6 +28,8 @@
         <source-file src="src/ios/libdtdev.a" framework="true" compiler-flags="-fno-objc-arc"/>
         
         <framework src="ExternalAccessory.framework" />
+        <framework src="AudioToolbox.framework" />
+        <framework src="MediaPlayer.framework" />
 
         <config-file target="*-Info.plist" parent="UISupportedExternalAccessoryProtocols">
             <array>
@@ -47,7 +49,5 @@
         <framework src="CoreImage.framework"/>
         <framework src="AudioToolbox.framework"/>
         <framework src="ExternalAccessory.framework" />
-        <framework src="AudioToolbox.framework" />
-        <framework src="MediaPlayer.framework" />
     </platform>    
 </plugin>
