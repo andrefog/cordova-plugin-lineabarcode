@@ -12,14 +12,14 @@ function LineaBarcode() {
     this.barcodeCallback = null;    
 }
 
-LineaBarcode.prototype.initLinea = function(connectionCallback, cardCallback, barcCallback, successCallback, errorCallback) {
+LineaBarcode.prototype.initLinea = function (connectionCallback, cardCallback, barcCallback, cancelCallback, successCallback, errorCallback) {
     if (cordova.platformId.toUpperCase() === 'IOS') {
         this.results = [];
         this.connCallback = connectionCallback;
         this.cardDataCallback = cardCallback;
         this.barcodeCallback = barcCallback;
-        exec(successCallback, errorCallback, "LineaBarcode", "initLinea", []);    
-    }
+        exec(successCallback, errorCallback, "LineaBarcode", "initLinea", []);        
+    }    
 };
            
 LineaBarcode.prototype.barcodeSetChargeDeviceOn = function () {
