@@ -164,7 +164,7 @@
 		}
 	}
     
-    NSString* retStr = [ NSString stringWithFormat:@"BarcodeScanner.connectionChanged(%d);", state];
+    NSString* retStr = [ NSString stringWithFormat:@"LineaBarcode.connectionChanged(%d);", state];
     //[[super webView] stringByEvaluatingJavaScriptFromString:retStr];
     if ([self.webView respondsToSelector:@selector(stringByEvaluatingJavaScriptFromString:)]) {
         // Cordova-iOS pre-4
@@ -198,7 +198,7 @@
     {
         NSLog(@"magneticCardData (full info): accountNumber - %@, cardholderName - %@, expirationYear - %@, expirationMonth - %@, serviceCode - %@, discretionaryData - %@, firstName - %@, lastName - %@", [card objectForKey:@"accountNumber"], [card objectForKey:@"cardholderName"], [card objectForKey:@"expirationYear"], [card objectForKey:@"expirationMonth"], [card objectForKey:@"serviceCode"], [card objectForKey:@"discretionaryData"], [card objectForKey:@"firstName"], [card objectForKey:@"lastName"]);
     }
-    NSString* retStr = [ NSString stringWithFormat:@"BarcodeScanner.onMagneticCardData('%@', '%@', '%@');", track1, track2, track3];
+    NSString* retStr = [ NSString stringWithFormat:@"LineaBarcode.onMagneticCardData('%@', '%@', '%@');", track1, track2, track3];
     if ([self.webView respondsToSelector:@selector(stringByEvaluatingJavaScriptFromString:)]) {
         // Cordova-iOS pre-4
         [self.webView performSelectorOnMainThread:@selector(stringByEvaluatingJavaScriptFromString:) withObject:retStr waitUntilDone:NO];
@@ -259,7 +259,7 @@
 
 - (void) barcodeData: (NSString *) barcode type:(int) type {
     NSLog(@"barcodeData: barcode - %@, type - %@", barcode, [dtdev barcodeType2Text:type]);
-    NSString* retStr = [ NSString stringWithFormat:@"BarcodeScanner.onBarcodeData('%@', '%@');", barcode, [dtdev barcodeType2Text:type]];
+    NSString* retStr = [ NSString stringWithFormat:@"LineaBarcode.onBarcodeData('%@', '%@');", barcode, [dtdev barcodeType2Text:type]];
     if ([self.webView respondsToSelector:@selector(stringByEvaluatingJavaScriptFromString:)]) {
         // Cordova-iOS pre-4
         [self.webView performSelectorOnMainThread:@selector(stringByEvaluatingJavaScriptFromString:) withObject:retStr waitUntilDone:NO];
@@ -271,7 +271,7 @@
 
 - (void) barcodeNSData: (NSData *) barcode isotype:(NSString *) isotype {
     NSLog(@"barcodeNSData: barcode - %@, type - %@", [[NSString alloc] initWithData:barcode encoding:NSUTF8StringEncoding], isotype);
-    NSString* retStr = [ NSString stringWithFormat:@"BarcodeScanner.onBarcodeData('%@', '%@');", [[NSString alloc] initWithData:barcode encoding:NSUTF8StringEncoding], isotype];
+    NSString* retStr = [ NSString stringWithFormat:@"LineaBarcode.onBarcodeData('%@', '%@');", [[NSString alloc] initWithData:barcode encoding:NSUTF8StringEncoding], isotype];
     if ([self.webView respondsToSelector:@selector(stringByEvaluatingJavaScriptFromString:)]) {
         // Cordova-iOS pre-4
         [self.webView performSelectorOnMainThread:@selector(stringByEvaluatingJavaScriptFromString:) withObject:retStr waitUntilDone:NO];
@@ -308,8 +308,8 @@
 - (void) barcodeNSData: (NSData *) barcode type:(int) type {    
     NSArray *codesArr = [[[NSString alloc] initWithData:barcode encoding:NSUTF8StringEncoding] componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"\n\r"]];
 	NSString* rawCodesArrJSString = [LineaBarcode generateStringForArrayEvaluationInJS:codesArr];
-	//BarcodeScanner.onBarcodeData(rawCode, type)
-    NSString* retStr = [ NSString stringWithFormat:@"var rawCodesArr = %@; BarcodeScanner.onBarcodeData(rawCodesArr, '%@');", rawCodesArrJSString, [dtdev barcodeType2Text:type]];
+	//LineaBarcode.onBarcodeData(rawCode, type)
+    NSString* retStr = [ NSString stringWithFormat:@"var rawCodesArr = %@; LineaBarcode.onBarcodeData(rawCodesArr, '%@');", rawCodesArrJSString, [dtdev barcodeType2Text:type]];
     if ([self.webView respondsToSelector:@selector(stringByEvaluatingJavaScriptFromString:)]) {
         // Cordova-iOS pre-4
         [self.webView performSelectorOnMainThread:@selector(stringByEvaluatingJavaScriptFromString:) withObject:retStr waitUntilDone:NO];
