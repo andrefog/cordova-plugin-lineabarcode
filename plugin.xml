@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugin id="cordova-plugin-lineabarcode" version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0">
+<plugin id="cordova-plugin-lineabarcode" version="1.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0">
     <name>Linea Barcode Scanner</name>
     <description>Agile Dev Team barcode scanner for Linea Pro devices, modified from com.citronium.lineaprocdv.v2 0.1</description>
     <author>Dom Slatford</author>

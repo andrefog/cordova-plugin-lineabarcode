@@ -4,22 +4,21 @@ var argscheck = require('cordova/argscheck'),
     exec = require('cordova/exec'),
     cordova = require('cordova');
               
- function LineaBarcode() {
+function LineaBarcode() {
     this.results = [];
     this.connCallback = null;
     this.errorCallback = null;
-    this.cancelCallback = null;
     this.cardDataCallback = null;
     this.barcodeCallback = null;    
 }
 
-LineaBarcode.prototype.initLinea = function(connectionCallback, cardCallback, barcCallback, cancelCallback, errorCallback) {
+LineaBarcode.prototype.initLinea = function(connectionCallback, cardCallback, barcCallback, successCallback, errorCallback) {
     if (cordova.platformId.toUpperCase() === 'IOS') {
         this.results = [];
         this.connCallback = connectionCallback;
         this.cardDataCallback = cardCallback;
         this.barcodeCallback = barcCallback;
-        exec(null, errorCallback, "LineaBarcode", "initDT", []);    
+        exec(successCallback, errorCallback, "LineaBarcode", "initLinea", []);    
     }
 };
            
