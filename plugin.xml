@@ -3,6 +3,8 @@
     <name>Linea Barcode Scanner</name>
     <description>Agile Dev Team barcode scanner for Linea Pro devices, modified from com.citronium.lineaprocdv v2.0.1</description>
     <author>Dom Slatford</author>
+    <repo>https://github.com/domisginger/cordova-plugin-lineabarcode</repo>
+    <issue>https://github.com/domisginger/cordova-plugin-lineabarcode/issues</issue>
     <license>MIT</license>  
         
     <engines>
@@ -23,14 +25,8 @@
         
         <header-file src="src/ios/LineaBarcode.h" />
         <header-file src="src/ios/DTDevices.h" />
-        <source-file src="src/ios/LineaBarcode.m" />
+        <source-file src="src/ios/LineaBarcode.m" />        
         
-        <source-file src="src/ios/libdtdev.a" framework="true" compiler-flags="-fno-objc-arc"/>
-        
-        <framework src="ExternalAccessory.framework" />
-        <framework src="AudioToolbox.framework" />
-        <framework src="MediaPlayer.framework" />
-
         <config-file target="*-Info.plist" parent="UISupportedExternalAccessoryProtocols">
             <array>
             <string>com.datecs.linea.pro.msr</string>
@@ -40,14 +36,7 @@
             </array>
         </config-file>
 
-        <framework src="libiconv.dylib"/>
-        <framework src="AVFoundation.framework"/>
-        <framework src="AssetsLibrary.framework"/>
-        <framework src="CoreVideo.framework"/>
-        <framework src="QuartzCore.framework"/>
-        <framework src="CoreGraphics.framework"/>
-        <framework src="CoreImage.framework"/>
-        <framework src="AudioToolbox.framework"/>
+        <source-file src="src/ios/libdtdev.a" framework="true" compiler-flags="-fno-objc-arc"/>        
         <framework src="ExternalAccessory.framework" />
     </platform>    
 </plugin>
