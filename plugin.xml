@@ -37,6 +37,8 @@
         </config-file>
 
         <source-file src="src/ios/libdtdev.a" framework="true" compiler-flags="-fno-objc-arc"/>        
+        <framework src="AudioToolbox.framework" />
+        <framework src="MediaPlayer.framework" />
         <framework src="ExternalAccessory.framework" />
     </platform>    
 </plugin>
