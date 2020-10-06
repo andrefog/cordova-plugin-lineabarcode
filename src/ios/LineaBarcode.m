@@ -25,7 +25,7 @@
     int percent;
     float voltage;
     
-	if([dtdev getBatteryCapacity:&percent voltage:&voltage error:nil])
+    if([dtdev getBatteryCapacity:&percent voltage:&voltage error:nil])
     {
         NSString *status = [NSString stringWithFormat:@"Bat: %.2fv, %d%%",voltage,percent];
         
@@ -37,11 +37,11 @@
         } else {
             // Cordova-iOS 4+
             [self.webView performSelectorOnMainThread:@selector(evaluateJavaScript:completionHandler:) withObject:jsStatement waitUntilDone:NO];
-        }        
+        }
     }
 }
 
--(void) scanPaymentCard:(NSString*)num {    
+-(void) scanPaymentCard:(NSString*)num {
     NSString *jsStatement = [NSString stringWithFormat:@"onSuccessScanPaymentCard('%@');", num];
     if ([self.webView respondsToSelector:@selector(stringByEvaluatingJavaScriptFromString:)]) {
         // Cordova-iOS pre-4
@@ -49,7 +49,7 @@
     } else {
         // Cordova-iOS 4+
         [self.webView performSelectorOnMainThread:@selector(evaluateJavaScript:completionHandler:) withObject:jsStatement waitUntilDone:NO];
-    }	[self.viewController dismissViewControllerAnimated:YES completion:nil];    
+    }    [self.viewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)initLinea:(CDVInvokedUrlCommand*)command
@@ -72,53 +72,53 @@
 }
 
 - (void)barcodeSetChargeDeviceOff:(CDVInvokedUrlCommand *)command
-{	    
-	[dtdev setCharging:0 error:nil];
+{
+    [dtdev setCharging:0 error:nil];
     CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsInt:[dtdev connstate]];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
 - (void)barcodeSetChargeDeviceOn:(CDVInvokedUrlCommand *)command
-{	    
-	[dtdev setCharging:1 error:nil];
-	CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsInt:[dtdev connstate]];
+{
+    [dtdev setCharging:1 error:nil];
+    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsInt:[dtdev connstate]];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
 - (void)barcodeSetScanBeepOff:(CDVInvokedUrlCommand *)command
-{	    
+{
     [dtdev barcodeSetScanBeep:0 volume: 0 beepData:nil length:0 error:nil];
     CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsInt:[dtdev connstate]];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
 - (void)barcodeSetScanBeepOn:(CDVInvokedUrlCommand *)command
-{	    
-	int beep[]={2730,100};
-	int beep2[]={523,200,523,200,784,200,784,200,880,200,880,200,784,200,698,200,698,200,659,200,659,200,587,200,587,200,523,200};
-	int val = 1 + arc4random() % (1500 - 1);
+{
+    int beep[]={2730,100};
+    int beep2[]={523,200,523,200,784,200,784,200,880,200,880,200,784,200,698,200,698,200,659,200,659,200,587,200,587,200,523,200};
+    int val = 1 + arc4random() % (1500 - 1);
 
-	if(val == 1337){
-		[dtdev barcodeSetScanBeep:1 volume: 100 beepData:beep2 length:sizeof(beep2) error:nil];		
-	}else{
-		[dtdev barcodeSetScanBeep:1 volume: 100 beepData:beep length:sizeof(beep) error:nil];
-	}   
-	    
-	CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsInt:[dtdev connstate]];
+    if(val == 1337){
+        [dtdev barcodeSetScanBeep:1 volume: 100 beepData:beep2 length:sizeof(beep2) error:nil];
+    }else{
+        [dtdev barcodeSetScanBeep:1 volume: 100 beepData:beep length:sizeof(beep) error:nil];
+    }
+        
+    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsInt:[dtdev connstate]];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
 - (void)barcodeSetPassThroughSyncOff:(CDVInvokedUrlCommand *)command
-{	    
+{
     [dtdev setPassThroughSync:0 error:nil];
     CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsInt:[dtdev connstate]];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
 - (void)barcodeSetPassThroughSyncOn:(CDVInvokedUrlCommand *)command
-{	    	
+{
     [dtdev setPassThroughSync:1 error:nil];
-	CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsInt:[dtdev connstate]];
+    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsInt:[dtdev connstate]];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
@@ -154,15 +154,15 @@
     NSLog(@"connectionState: %d", state);
     
     switch (state) {
-		case CONN_DISCONNECTED:
-		case CONN_CONNECTING:
+        case CONN_DISCONNECTED:
+        case CONN_CONNECTING:
                 break;
-		case CONN_CONNECTED:
-		{
-			NSLog(@"PPad connected!\nSDK version: %d.%d\nHardware revision: %@\nFirmware revision: %@\nSerial number: %@", dtdev.sdkVersion/100,dtdev.sdkVersion%100,dtdev.hardwareRevision,dtdev.firmwareRevision,dtdev.serialNumber);
-			break;
-		}
-	}
+        case CONN_CONNECTED:
+        {
+            NSLog(@"PPad connected!\nSDK version: %d.%d\nHardware revision: %@\nFirmware revision: %@\nSerial number: %@", dtdev.sdkVersion/100,dtdev.sdkVersion%100,dtdev.hardwareRevision,dtdev.firmwareRevision,dtdev.serialNumber);
+            break;
+        }
+    }
     
     NSString* retStr = [ NSString stringWithFormat:@"LineaBarcode.connectionChanged(%d);", state];
     //[[super webView] stringByEvaluatingJavaScriptFromString:retStr];
@@ -171,7 +171,8 @@
         [self.webView performSelectorOnMainThread:@selector(stringByEvaluatingJavaScriptFromString:) withObject:retStr waitUntilDone:NO];
     } else {
         // Cordova-iOS 4+
-        [self.webView performSelectorOnMainThread:@selector(evaluateJavaScript:completionHandler:) withObject:retStr waitUntilDone:NO];
+//        [self.webView performSelectorOnMainThread:@selector(evaluateJavaScript:completionHandler:) withObject:retStr waitUntilDone:NO];
+        [self.commandDelegate evalJs:retStr];
     }
 }
 
@@ -204,7 +205,8 @@
         [self.webView performSelectorOnMainThread:@selector(stringByEvaluatingJavaScriptFromString:) withObject:retStr waitUntilDone:NO];
     } else {
         // Cordova-iOS 4+
-        [self.webView performSelectorOnMainThread:@selector(evaluateJavaScript:completionHandler:) withObject:retStr waitUntilDone:NO];
+        //[self.webView performSelectorOnMainThread:@selector(evaluateJavaScript:completionHandler:) withObject:retStr waitUntilDone:NO];
+        [self.commandDelegate evalJs:retStr];
     }
 }
 
@@ -265,7 +267,8 @@
         [self.webView performSelectorOnMainThread:@selector(stringByEvaluatingJavaScriptFromString:) withObject:retStr waitUntilDone:NO];
     } else {
         // Cordova-iOS 4+
-        [self.webView performSelectorOnMainThread:@selector(evaluateJavaScript:completionHandler:) withObject:retStr waitUntilDone:NO];
+        //[self.webView performSelectorOnMainThread:@selector(evaluateJavaScript:completionHandler:) withObject:retStr waitUntilDone:NO];
+        [self.commandDelegate evalJs:retStr];
     }
 }
 
@@ -277,7 +280,8 @@
         [self.webView performSelectorOnMainThread:@selector(stringByEvaluatingJavaScriptFromString:) withObject:retStr waitUntilDone:NO];
     } else {
         // Cordova-iOS 4+
-        [self.webView performSelectorOnMainThread:@selector(evaluateJavaScript:completionHandler:) withObject:retStr waitUntilDone:NO];
+        //[self.webView performSelectorOnMainThread:@selector(evaluateJavaScript:completionHandler:) withObject:retStr waitUntilDone:NO];
+        [self.commandDelegate evalJs:retStr];
     }
 }
 
@@ -305,17 +309,18 @@
     return arrayJSString;
 }
 
-- (void) barcodeNSData: (NSData *) barcode type:(int) type {    
+- (void) barcodeNSData: (NSData *) barcode type:(int) type {
     NSArray *codesArr = [[[NSString alloc] initWithData:barcode encoding:NSUTF8StringEncoding] componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"\n\r"]];
-	NSString* rawCodesArrJSString = [LineaBarcode generateStringForArrayEvaluationInJS:codesArr];
-	//LineaBarcode.onBarcodeData(rawCode, type)
+    NSString* rawCodesArrJSString = [LineaBarcode generateStringForArrayEvaluationInJS:codesArr];
+    //LineaBarcode.onBarcodeData(rawCode, type)
     NSString* retStr = [ NSString stringWithFormat:@"var rawCodesArr = %@; LineaBarcode.onBarcodeData(rawCodesArr, '%@');", rawCodesArrJSString, [dtdev barcodeType2Text:type]];
     if ([self.webView respondsToSelector:@selector(stringByEvaluatingJavaScriptFromString:)]) {
         // Cordova-iOS pre-4
         [self.webView performSelectorOnMainThread:@selector(stringByEvaluatingJavaScriptFromString:) withObject:retStr waitUntilDone:NO];
     } else {
         // Cordova-iOS 4+
-        [self.webView performSelectorOnMainThread:@selector(evaluateJavaScript:completionHandler:) withObject:retStr waitUntilDone:NO];
+        //[self.webView performSelectorOnMainThread:@selector(evaluateJavaScript:completionHandler:) withObject:retStr waitUntilDone:NO];
+        [self.commandDelegate evalJs:retStr];
     }
 }
 
