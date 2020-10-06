@@ -92,14 +92,18 @@ LineaBarcode.prototype.onMagneticCardData = function (track1, track2, track3) {
     this.cardDataCallback(track1 + track2 + track3);
 };
 
-LineaBarcode.prototype.onBarcodeData = function (rawCodesArr, type) {        
+LineaBarcode.prototype.onBarcodeData = function (rawCodesArr, type) {
     var result = {
         text: String(rawCodesArr),
         format: type,
         cancelled: false
     };
+
+    console.log('Barcode Event Dispatcher');
+    document.dispatchEvent(new CustomEvent('onBarcodeScanned',{detail: { barcode: String(rawCodesArr) }}));
     
     this.barcodeCallback(result);
+    
 };  
               
 module.exports = new LineaBarcode();
